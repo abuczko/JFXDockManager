@@ -41,6 +41,7 @@ public abstract class DockPanel<T extends Node & IDockPanel, K extends Enum> imp
     private DoubleProperty prefWidth = null;
     private DoubleProperty prefHeight = null;
     private ObjectProperty<K> dockPosition = null;
+    private DockPanelType dockPanelType;
     public StringProperty title = null;
 
     public final StringProperty titleProperty() {
@@ -131,8 +132,7 @@ public abstract class DockPanel<T extends Node & IDockPanel, K extends Enum> imp
         }
         return dockPosition;
     }
-    
-   
+
     public void setContent(Node content) {
         this.contentProperty().set(content);
     }
@@ -229,8 +229,9 @@ public abstract class DockPanel<T extends Node & IDockPanel, K extends Enum> imp
         Event.fireEvent(this, evt);
     }
 
-    public DockPanel(T graphic) {
+    public DockPanel(T graphic, DockPanelType dockPanelType) {
         this();
+        this.dockPanelType = dockPanelType;
         graphicProperty().set(graphic);
         contentProperty().addListener(contentChangeListener);
     }
@@ -277,5 +278,25 @@ public abstract class DockPanel<T extends Node & IDockPanel, K extends Enum> imp
             }
         }
     };
+    
+    public DockPanelType getDockPanelType(){
+        return dockPanelType;
+    }
 
+    public static enum DockPanelType {
+
+        HIDEABLE, FLOAT, DOCUMENT;
+        
+        public boolean isHideable(){
+            return this.equals(HIDEABLE);
+        }
+        
+        public boolean isFloat(){
+            return this.equals(FLOAT);
+        }
+        
+        public boolean isDocument(){
+            return this.equals(DOCUMENT);
+        }
+    }
 }

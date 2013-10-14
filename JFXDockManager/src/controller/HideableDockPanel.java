@@ -8,8 +8,6 @@ import interfaces.IDockPanel;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleObjectProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -25,21 +23,8 @@ import javafx.scene.layout.GridPane;
 public class HideableDockPanel extends DockPanel<HideableDockPanel.HideableDockPanelSkin, HideableDockPanel.DockPosition> {
 
     public HideableDockPanel() {
-        super(new HideableDockPanelSkin());
+        super(new HideableDockPanelSkin(),DockPanelType.HIDEABLE);
 
-    }
-    private ObjectProperty<HideableDockPanelState> hideableDockPanelStateProperty = new SimpleObjectProperty<>();
-
-    public void setHideableDockPanelState(HideableDockPanelState state) {
-        this.hideableDockPanelStateProperty.set(state);
-    }
-
-    public HideableDockPanelState getHideableDockPanelState() {
-        return this.hideableDockPanelStateProperty.get();
-    }
-
-    public final ObjectProperty<HideableDockPanelState> hideableDockPanelStateProperty() {
-        return this.hideableDockPanelStateProperty;
     }
 
     @Override
@@ -52,13 +37,7 @@ public class HideableDockPanel extends DockPanel<HideableDockPanel.HideableDockP
         return HideableDockPanel.super.dockPositionProperty().get();
     }
 
-    public static enum HideableDockPanelState {
-
-        HIDDEN,
-        FLOATING,
-        DOCKED
-    };
-
+    
     public static enum DockPosition {
 
         LEFT,

@@ -10,6 +10,7 @@ import javafx.beans.DefaultProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
@@ -28,26 +29,14 @@ public final class DockManager extends GridPane implements IPositionPanelOperati
      * PRIVATE FINAL VARIABLES**************************************************
      * *************************************************************************
      */
-
-    private final DockManagerPositionPanel positionPanel;
-    private final HideableDockPanel leftSide = new HideableDockPanel();
-    private final HideableDockPanel rightSide = new HideableDockPanel();
-    private final HideableDockPanel topSide = new HideableDockPanel();
-    private final HideableDockPanel bottomSide = new HideableDockPanel();
-    private final DocumentDocPanel centerSide = new DocumentDocPanel();
-    
-    /*
-     * *************************************************************************
-     * PRIVATE VARIABLES********************************************************
-     * *************************************************************************
-     */
-    private ObservableList<DockPanel> dockPanels = FXCollections.observableArrayList();
-    private ColumnConstraints leftSideColumnConstraint = new ColumnConstraints();
-    private ColumnConstraints rightSideColumnConstraint = new ColumnConstraints();
-    private ColumnConstraints centerSideColumnConstraint = new ColumnConstraints();
-    private RowConstraints topSideRowConstraint = new RowConstraints();
-    private RowConstraints bottomSideRowConstraint = new RowConstraints();
-    private RowConstraints centerSideRowConstraint = new RowConstraints();
+    private final DockManagerPositionPanel positionPanel;    
+    private final ObservableList<DockPanel> dockPanels = FXCollections.observableArrayList();
+    private final ColumnConstraints leftSideColumnConstraint = new ColumnConstraints();
+    private final ColumnConstraints rightSideColumnConstraint = new ColumnConstraints();
+    private final ColumnConstraints centerSideColumnConstraint = new ColumnConstraints();
+    private final RowConstraints topSideRowConstraint = new RowConstraints();
+    private final RowConstraints bottomSideRowConstraint = new RowConstraints();
+    private final RowConstraints centerSideRowConstraint = new RowConstraints();
     /*
      * *************************************************************************
      * PUBLIC CONSTRUCTOR*******************************************************
@@ -86,9 +75,6 @@ public final class DockManager extends GridPane implements IPositionPanelOperati
     public ObservableList<DockPanel> getDockPanels() {
         return dockPanels;
     }
-    
-    
-
     /*
      * *************************************************************************
      * PRIVATE METHODS**********************************************************
@@ -97,8 +83,7 @@ public final class DockManager extends GridPane implements IPositionPanelOperati
     private void initialize() {        
         this.positionPanel.prefHeightProperty().bind(this.prefHeightProperty());
         this.positionPanel.prefWidthProperty().bind(this.prefWidthProperty());
-//        this.dockPanels.addListener(dockPanelChangeListener);        
-        
+        this.dockPanels.addListener(dockPanelChangeListener);  
         this.parentProperty().addListener(parentProeprtyChangeListener);
         this.getColumnConstraints().add(leftSideColumnConstraint);
         this.getColumnConstraints().add(rightSideColumnConstraint);
@@ -106,15 +91,8 @@ public final class DockManager extends GridPane implements IPositionPanelOperati
         this.getRowConstraints().add(topSideRowConstraint);
         this.getRowConstraints().add(bottomSideRowConstraint);
         this.getRowConstraints().add(centerSideRowConstraint);
-        this.add(leftSide.graphicProperty().get(), 0, 0,1,3);
-        this.add(rightSide.graphicProperty().get(), 2, 0,1,3);
-        this.add(topSide.graphicProperty().get(), 0, 0,3,1);
-        this.add(bottomSide.graphicProperty().get(), 0, 2,3,1);
-        //this.add(centerSide.graphicProperty().get(), 1, 2,1,1);
         this.add(positionPanel, 0, 0, 3, 3);
         this.positionPanel.toBack();
-        
-//        
     }
     /*
      * *************************************************************************
@@ -140,16 +118,17 @@ public final class DockManager extends GridPane implements IPositionPanelOperati
             }
         }
     };
-//    private ListChangeListener<DockPanel> dockPanelChangeListener = new ListChangeListener<DockPanel>() {
-//        @Override
-//        public void onChanged(ListChangeListener.Change<? extends DockPanel> change) {
-//            while (change.next()) {
-//                if (change.wasAdded()) {
-//                    for (DockPanel dockPanel : change.getAddedSubList()) {
-//                        DockManager.this.getChildren().add((Node) dockPanel.graphicProperty().get());
-//                    }
-//                }
-//            }
-//        }
-//    };
+    private ListChangeListener<DockPanel> dockPanelChangeListener = new ListChangeListener<DockPanel>() {
+        @Override
+        public void onChanged(ListChangeListener.Change<? extends DockPanel> change) {
+            while (change.next()) {
+                if (change.wasAdded()) {
+                    for (DockPanel dockPanel : change.getAddedSubList()) {
+                        
+                        DockManager.this.getChildren().add((Node) dockPanel.graphicProperty().get());
+                    }
+                }
+            }
+        }
+    };
 }

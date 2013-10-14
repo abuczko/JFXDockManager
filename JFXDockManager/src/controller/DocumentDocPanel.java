@@ -11,7 +11,7 @@ package controller;
 public class DocumentDocPanel extends DockPanel<HideableDockPanel.HideableDockPanelSkin, HideableDockPanel.DockPosition> {
 
     public DocumentDocPanel() {
-        super(null);
+        super(null, DockPanelType.DOCUMENT);
     }
 
     @Override
