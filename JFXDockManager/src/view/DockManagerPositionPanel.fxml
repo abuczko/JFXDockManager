@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.image.*?>
+<fx:root type="javafx.scene.layout.BorderPane" id="dockManagerPositionPanel" visible="false"  xmlns:fx="http://javafx.com/fxml">
+    <style>
+        <String fx:value="-fx-background-color: rgba(0, 100, 100, 0.85);"/>
+    </style>     
+    <top>  
+        <ImageView fx:id="topButton" onDragDetected="#topSideDragDetect"  fitHeight="32" fitWidth="32" BorderPane.alignment="CENTER" >
+            <image>
+                <Image url="@/view/resources/up_button_icon.png"/>
+            </image>
+        </ImageView>
+    </top>
+    <left>
+        <ImageView AnchorPane.leftAnchor="50" fitHeight="32" fitWidth="32" BorderPane.alignment="CENTER"  >
+            <image>
+                <Image url="@/view/resources/left_button_icon.png"/>
+            </image>
+        </ImageView>
+    </left>
+    <right>
+        <ImageView AnchorPane.rightAnchor="50" fitHeight="32" fitWidth="32" BorderPane.alignment="CENTER"  >
+            <image>
+                <Image url="@/view/resources/right_button_icon.png"/>
+            </image>
+        </ImageView>
+    </right>
+    <bottom>
+        <ImageView AnchorPane.bottomAnchor="50" fitHeight="32" fitWidth="32" BorderPane.alignment="CENTER"   >
+            <image>
+                <Image url="@/view/resources/down_button_icon.png"/>
+            </image>
+        </ImageView>   
+    </bottom>
+</fx:root>

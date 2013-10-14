@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<fx:root type="javafx.scene.layout.GridPane" id="hideableDockPanel" xmlns:fx="http://javafx.com/fxml">
+    <stylesheets>
+        <URL value="@/controller/style/hideabledockpanel.css"/>
+    </stylesheets>
+    <columnConstraints>
+        <ColumnConstraints fillWidth="true" /> 
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints fx:id="headerRowConstraint" minHeight="25" maxHeight="25" />
+        <RowConstraints fx:id="contentRowConstraint" fillHeight="true"  /> 
+    </rowConstraints>
+    <HBox fx:id="header" fillHeight="true"  GridPane.rowIndex="0" GridPane.columnIndex="0">
+        <prefHeight>
+            <Double fx:value="99999999999"  />  <!-- Double.MAX_VALUE fx:constant sometimes not working -->
+        </prefHeight>
+        <prefWidth>
+           <Double fx:value="99999999999"  />
+        </prefWidth>
+        <Label fx:id="titleLabel" HBox.hgrow="SOMETIMES" alignment="CENTER_LEFT"  />
+        <!-- header gombok: opciók, autohide, close -->
+    </HBox>
+    <SplitPane fx:id="content" GridPane.rowIndex="1" GridPane.columnIndex="0"  orientation="VERTICAL"  >
+        <prefHeight>
+          <Double fx:value="99999999999"  />
+        </prefHeight>
+        <prefWidth>
+           <Double fx:value="99999999999"  />
+        </prefWidth>        
+    </SplitPane>      
+</fx:root>
