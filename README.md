@@ -1,0 +1,4 @@
+JFXDockManager
+==============
+
+JavaFX dockmanager
